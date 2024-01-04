@@ -1,19 +1,108 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+let cardData = [
+  {
+    icon: 'Check',
+    value: '全栈',
+  },
+  {
+    icon: 'House',
+    value: 'RBAC用户角色权限',
+  },
+  {
+    icon: 'Link',
+    value: 'Vite',
+  },
+
+  {
+    icon: 'Compass',
+    value: 'Vue3+Typescript+Nest',
+  },
+  {
+    icon: 'Crop',
+    value: 'Typeorm',
+  },
+  {
+    icon: 'Open',
+    value: 'Mysql',
+  },
+  {
+    icon: 'Pointer',
+    value: 'Redis',
+  },
+  {
+    icon: 'Lock',
+    value: '动态路由',
+  },
+  {
+    icon: 'PieChart',
+    value: 'VueUse',
+  },
+  {
+    icon: 'Switch',
+    value: 'Pinia',
+  },
+  {
+    icon: 'Crop',
+    value: 'vue-outer',
+  },
+  {
+    icon: 'Open',
+    value: 'Element-plus',
+  },
+  {
+    icon: 'Pointer',
+    value: 'Redis',
+  },
+  {
+    icon: 'Pointer',
+    value: '小皮面板',
+  },
+  {
+    icon: 'Pointer',
+    value: '动态路由',
+  },
+  {
+    icon: 'Pointer',
+    value: 'Axios封装',
+  },
+  {
+    icon: 'Pointer',
+    value: 'DayJS',
+  },
+];
+</script>
 
 <template>
   <div>
-    <el-descriptions :column="3" size="small" class="mt-4">
-      <el-descriptions-item label="Username">red润</el-descriptions-item>
-      <el-descriptions-item label="Telephone">19853149156</el-descriptions-item>
-      <el-descriptions-item label="Place">山东</el-descriptions-item>
-      <el-descriptions-item label="Remarks">
-        <el-tag size="small">School</el-tag>
-      </el-descriptions-item>
-      <el-descriptions-item label="Address"
-        >山东省，济南市
-      </el-descriptions-item>
-    </el-descriptions>
+    <h1>
+      <span class="title">redrun_admin</span>
+    </h1>
+    <el-space wrap :size="40">
+      <el-card v-for="item in cardData" :key="item.value + item.icon">
+        <div class="card-header">
+          <el-button type="primary" :icon="item.icon">{{
+            item.value
+          }}</el-button>
+        </div>
+      </el-card>
+    </el-space>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h1 {
+  color: transparent;
+  text-align: center;
+  letter-spacing: -0.4px;
+  line-height: 40px;
+  font-weight: 700;
+  white-space: pre-wrap;
+  margin-bottom: 40px;
+}
+.title {
+  font-size: 56px;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  background-clip: text;
+}
+</style>
