@@ -69,6 +69,18 @@ let cardData = [
     icon: 'Pointer',
     value: 'DayJS',
   },
+  {
+    icon: 'Pointer',
+    value: 'Swagger',
+  },
+  {
+    icon: 'Pointer',
+    value: 'JWT',
+  },
+  {
+    icon: 'Pointer',
+    value: 'mailer',
+  },
 ];
 </script>
 
