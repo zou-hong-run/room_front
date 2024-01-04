@@ -7,6 +7,9 @@ import {
   BookingItemResultType,
   BookingListParamType,
 } from '@/api/room/booking/types';
+import { useUserStore } from '@/store/user';
+const userStore = useUserStore();
+let user_name = userStore.user_name;
 
 const tableData = ref<BookingItemResultType[]>([]);
 const searchForm = reactive<BookingListParamType>({
@@ -28,7 +31,9 @@ const initData = async () => {
   let res = await bookingList(searchForm, pageNo.value, pageSize.value);
   if (res.code === 200) {
     if (res.data.bookings) {
-      tableData.value = res.data.bookings;
+      tableData.value = res.data.bookings.filter((item) => {
+        return item.user.user_name === user_name;
+      });
       total.value = res.data.totalCount;
     }
   } else {
@@ -162,30 +167,7 @@ initData();
         <el-table-column label="操作">
           <template #default="scope">
             <el-popconfirm
-              title="你确定要通过申请吗"
-              @confirm="
-                () => {
-                  changeStatus(scope.row.id, 'apply');
-                }
-              "
-            >
-              <template #reference>
-                <el-button bg text type="primary" size="small">通过</el-button>
-              </template>
-            </el-popconfirm>
-            <el-popconfirm
-              title="你确定要驳回吗"
-              @confirm="
-                () => {
-                  changeStatus(scope.row.id, 'reject');
-                }
-              "
-            >
-              <template #reference>
-                <el-button bg text type="primary" size="small">驳回</el-button>
-              </template>
-            </el-popconfirm>
-            <el-popconfirm
+              v-if="scope.row.status === '申请中'"
               title="你确定要解除申请吗"
               @confirm="
                 () => {

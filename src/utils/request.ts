@@ -44,24 +44,36 @@ request.interceptors.response.use(
         if (res.code === 200) {
           return request(config);
         } else {
-          ElMessage.error('用户登录信息过期，请重新登录');
+          ElMessage({
+            message: '用户登录信息过期，请重新登录',
+            type: 'error',
+            duration: 5 * 1000,
+          });
           return Promise.reject(res.data);
         }
       } catch (error) {
         // 刷新token失败，清除用户登录信息
         userStore.LogOut();
-        ElMessage.error('用户登录状态信息已过期！');
+        ElMessage({
+          message: '用户登录状态信息已过期！',
+          type: 'error',
+          duration: 5 * 1000,
+        });
         location.href = '/';
         return Promise.reject('用户登录状态信息已过期！');
       }
     } else if (code === 500) {
-      ElMessage.error({
+      ElMessage({
         message: msg,
+        type: 'error',
+        duration: 5 * 1000,
       });
       return Promise.reject('服务器尚不可用');
     } else if (code !== 200) {
-      ElMessage.error({
+      ElMessage({
         message: msg,
+        type: 'error',
+        duration: 5 * 1000,
       });
       return Promise.reject(msg);
     } else {

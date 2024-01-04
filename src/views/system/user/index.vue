@@ -10,7 +10,10 @@ import {
   type FormInstance,
   type FormRules,
 } from 'element-plus';
-import type { UserResultType, CreateUserType } from '@/api/system/user/types';
+import type {
+  UserItemResultType,
+  CreateUserType,
+} from '@/api/system/user/types';
 import type { RoleResultType } from '@/api/system/role/types';
 import type { PostResultType } from '@/api/system/post/types';
 import type { DeptResultType } from '@/api/system/dept/types';
@@ -45,7 +48,7 @@ export interface OptionItemType {
   value: number;
 }
 
-const userList = ref<UserResultType[]>([]);
+const userList = ref<UserItemResultType[]>([]);
 const roleList = ref<RoleResultType[]>([]);
 const postList = ref<PostResultType[]>([]);
 const deptList = ref<DeptResultType[]>([]);

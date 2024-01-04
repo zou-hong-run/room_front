@@ -1,4 +1,4 @@
-export interface UserResultType {
+export interface UserItemResultType {
   id: number;
   user_name: string;
   nick_name: string;
@@ -10,7 +10,7 @@ export interface UserResultType {
   post: [];
 }
 export interface UserListResultType {
-  users: UserResultType[];
+  users: UserItemResultType[];
   totalCount: number;
 }
 

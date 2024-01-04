@@ -13,7 +13,6 @@ const whiteList = ['/login', '/404', '/401'];
 
 export const createRouterGuards = (router: Router) => {
   router.beforeEach(async (to) => {
-    // console.log(router.getRoutes());
     const userStore = useUserStore();
     const permissionsStore = usePermissionsStore();
     let access_token = getAccessToken();
