@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/store/settings';
+import { removeAccessToken } from '@/utils/auth';
 
+const logout = () => {
+  removeAccessToken();
+  window.location.reload();
+};
 const settingsStore = useSettingsStore();
 const handleCollapse = () => {
   settingsStore.setIsCollapse(!settingsStore.isCollapse);
@@ -24,12 +29,16 @@ const handleCollapse = () => {
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       /></template>
       <template #content>
-        <div class="flex items-center">what？</div>
+        <div class="flex items-center" style="color: #40a9ff; font-size: 14px">
+          (*￣︶￣)你好啊-邹红润
+        </div>
       </template>
       <template #extra>
         <div class="flex items-center">
-          <el-button>Print</el-button>
-          <el-button type="primary" class="ml-2">Edit</el-button>
+          <!-- <el-button>详情</el-button> -->
+          <el-button type="primary" class="ml-2" @click="logout"
+            >登出</el-button
+          >
         </div>
       </template>
     </el-page-header>

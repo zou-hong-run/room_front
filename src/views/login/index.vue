@@ -21,7 +21,7 @@ export interface LoginFormData {
 const loginFormData = reactive<LoginFormData>({
   username: 'zhangsan',
   password: '123456',
-  captcha: 'ouhidj',
+  captcha: '',
 });
 const redirect = ref('');
 watch(
@@ -106,6 +106,13 @@ const resetForm = (formEl: FormInstance | undefined) => {
 <template>
   <div class="login">
     <el-row>
+      <el-col :offset="8" :span="8">
+        <el-alert title="您的会议室管理好帮手" type="success"></el-alert>
+        <el-alert title="实现线上无障碍沟通" type="success"></el-alert>
+        <el-alert title="多人线上实时会议" type="success"></el-alert>
+      </el-col>
+    </el-row>
+    <el-row>
       <el-col :xs="0" :sm="0" :md="8" :span="8"></el-col>
       <el-col :xs="24" :sm="24" :md="8" :span="8">
         <el-form
@@ -117,7 +124,20 @@ const resetForm = (formEl: FormInstance | undefined) => {
           class="login_form"
         >
           <el-form-item>
-            <h1>redrun_admin管理系统</h1>
+            <h1
+              style="
+                width: 100%;
+                text-align: center;
+                font-size: 50px;
+                height: 50px;
+                line-height: 50px;
+                -webkit-text-fill-color: transparent;
+                background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+                background-clip: text;
+              "
+            >
+              企业会议室预定系统
+            </h1>
           </el-form-item>
           <el-form-item label="用户名" prop="username">
             <el-input

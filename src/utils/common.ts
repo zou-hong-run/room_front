@@ -17,3 +17,132 @@ console.log(result); // 输出： https://example.com/path/to/resource
  */
 export const uniqueSlash = (path: string) =>
   path.replace(/(https?:\/)|(\/)+/g, '$1$2');
+
+/**
+ * 获取本地媒体数据流
+ * @param {MediaStreamConstraints} constraints
+ */
+export const getLocalMediaStream = async (
+  constraints: MediaStreamConstraints,
+) => {
+  try {
+    let stream = await navigator.mediaDevices.getUserMedia(constraints);
+    return stream;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+/**
+ * 获取本地共享屏幕数据流
+ * @param {MediaStreamConstraints} constraints
+ */
+export const getLocalScreenMediaStream = async (
+  constraints: MediaStreamConstraints,
+) => {
+  try {
+    let stream = await navigator.mediaDevices.getDisplayMedia(constraints);
+    return stream;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+/**
+ *
+ * @param {HTMLVideoElement} ele
+ * @param {MediaProvider } newStream
+ */
+export const setLocalVideoStream = (
+  ele: HTMLVideoElement,
+  newStream: MediaProvider,
+) => {
+  if (ele) {
+    let stream = ele.srcObject as MediaStream;
+    if (stream) {
+      stream.getAudioTracks().forEach((e) => {
+        stream.removeTrack(e);
+      });
+      stream.getVideoTracks().forEach((e) => {
+        stream.removeTrack(e);
+      });
+    }
+    ele.srcObject = newStream;
+  }
+};
+/**
+ *
+ * @param {HTMLVideoElement} ele
+ * @param {*} track
+ */
+export const setRemoteVideoStream = (ele: HTMLVideoElement, track: any) => {
+  if (ele) {
+    let stream = ele.srcObject as MediaStream;
+    if (stream) {
+      stream.addTrack(track);
+    } else {
+      let newStream = new MediaStream();
+      newStream.addTrack(track);
+      ele.srcObject = newStream;
+      ele.muted = true;
+    }
+  }
+};
+
+export const createPeerConnection = () => {
+  const peer = new RTCPeerConnection({
+    bundlePolicy: 'max-bundle',
+    rtcpMuxPolicy: 'require',
+    // iceTransportPolicy: 'relay',// 强制服务器转发
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+  });
+  return peer;
+};
+/**
+ *
+ * @param {number} count
+ * @returns
+ */
+export const createVideoEle = (count: number) => {
+  let video_container = document.querySelector('.video-container')!;
+  /**
+   * @type {HTMLVideoElement}
+   */
+  let video: HTMLVideoElement = document.querySelector('#video' + count)!;
+  if (!video) {
+    video = document.createElement('video');
+    video.muted = true;
+    video.autoplay = true;
+    video.controls = false;
+    video.style.cssText += `width: 70%;
+    height: 70%;
+    border: 1px solid pink;
+    border-radius: 15px;`;
+    video.id = 'video' + count;
+    video_container.appendChild(video);
+  }
+  return video;
+};
+/**
+ *
+ * @param {number} count
+ * @returns
+ */
+export const createVideoEleUseByMany = (count: number) => {
+  let video_container = document.querySelector('.video-container')!;
+  /**
+   * @type {HTMLVideoElement}
+   */
+  let video: HTMLVideoElement = document.querySelector('#video' + count)!;
+  if (!video) {
+    video = document.createElement('video');
+    video.muted = true;
+    video.autoplay = true;
+    video.controls = false;
+    video.style.cssText += `width: 40%;
+    height: 40%;
+    border: 1px solid pink;
+    border-radius: 15px;`;
+    video.id = 'video' + count;
+    video_container.appendChild(video);
+  }
+  return video;
+};

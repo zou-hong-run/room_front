@@ -1,6 +1,27 @@
 <script setup lang="ts">
 let cardData = [
   {
+    icon: 'House',
+    value: '功能强大',
+  },
+  {
+    icon: 'Link',
+    value: '方便管理',
+  },
+
+  {
+    icon: 'Compass',
+    value: '提高管理效率',
+  },
+  {
+    icon: 'Crop',
+    value: '会议室管理系统',
+  },
+  {
+    icon: 'Open',
+    value: '线上管理系统',
+  },
+  {
     icon: 'Check',
     value: '全栈',
   },
@@ -87,7 +108,7 @@ let cardData = [
 <template>
   <div>
     <h1>
-      <span class="title">redrun_admin</span>
+      <span class="title">企业会议室管理系统</span>
     </h1>
     <el-space wrap :size="40">
       <el-card v-for="item in cardData" :key="item.value + item.icon">
@@ -116,5 +137,10 @@ h1 {
   -webkit-text-fill-color: transparent;
   background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
   background-clip: text;
+}
+.chat {
+  width: 60px;
+  height: 60px;
+  background-color: red;
 }
 </style>
